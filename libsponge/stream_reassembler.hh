@@ -4,6 +4,9 @@
 #include "byte_stream.hh"
 
 #include <cstdint>
+#include <deque>
+#include <functional>
+#include <iostream>
 #include <string>
 
 //! \brief A class that assembles a series of excerpts from a byte stream (possibly out of order,
@@ -12,8 +15,27 @@ class StreamReassembler {
   private:
     // Your code here -- add private members as necessary.
 
+    bool _eof = false;
+
     ByteStream _output;  //!< The reassembled in-order byte stream
     size_t _capacity;    //!< The maximum number of bytes
+    size_t _unassembled_bytes = 0;
+
+    size_t _waiting_index = 0;
+
+    struct block {
+        size_t index;
+        string data;
+        struct block &operator=(struct block other) noexcept {
+            this->data = other.data;
+            this->index = other.index;
+            return *this;
+        }
+    };
+
+    deque<struct block> _blocks = {};
+
+    void _insert_block(struct block incomming);
 
   public:
     //! \brief Construct a `StreamReassembler` that will store up to `capacity` bytes.
