@@ -25,6 +25,7 @@ int main() {
             test.execute(BytesAssembled(6));
             test.execute(BytesAvailable("ef"));
         }
+        cout << 111 << endl << endl;
 
         {
             ReassemblerTestHarness test{2};
@@ -43,6 +44,7 @@ int main() {
 
             test.execute(BytesAvailable("cd"));
         }
+        cout << 222 << endl << endl;
 
         {
             ReassemblerTestHarness test{1};
@@ -62,16 +64,19 @@ int main() {
             test.execute(BytesAvailable("b"));
             test.execute(BytesAssembled(2));
         }
+        cout << 333 << endl << endl;
 
         {
             ReassemblerTestHarness test{3};
             for (unsigned int i = 0; i < 99997; i += 3) {
+                cout << endl << "i: " << i << endl;
                 const string segment = {char(i), char(i + 1), char(i + 2), char(i + 13), char(i + 47), char(i + 9)};
                 test.execute(SubmitSegment{segment, i});
                 test.execute(BytesAssembled(i + 3));
                 test.execute(BytesAvailable(segment.substr(0, 3)));
             }
         }
+        cout << 444 << endl;
 
     } catch (const exception &e) {
         cerr << "Exception: " << e.what() << endl;

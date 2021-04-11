@@ -17,6 +17,7 @@ int main() {
             test.execute(BytesAvailable(""));
             test.execute(NotAtEof{});
         }
+        printf("111\n");
 
         {
             ReassemblerTestHarness test{65000};
@@ -27,6 +28,7 @@ int main() {
             test.execute(BytesAvailable("a"));
             test.execute(NotAtEof{});
         }
+        printf("222\n");
 
         {
             ReassemblerTestHarness test{65000};
@@ -37,6 +39,7 @@ int main() {
             test.execute(BytesAvailable("a"));
             test.execute(AtEof{});
         }
+        printf("333\n");
 
         {
             ReassemblerTestHarness test{65000};
@@ -47,6 +50,7 @@ int main() {
             test.execute(BytesAvailable(""));
             test.execute(AtEof{});
         }
+        printf("444\n");
 
         {
             ReassemblerTestHarness test{65000};
@@ -57,6 +61,7 @@ int main() {
             test.execute(BytesAvailable("b"));
             test.execute(AtEof{});
         }
+        printf("555\n");
 
         {
             ReassemblerTestHarness test{65000};
@@ -67,6 +72,7 @@ int main() {
             test.execute(BytesAvailable(""));
             test.execute(NotAtEof{});
         }
+        printf("666\n");
 
         {
             ReassemblerTestHarness test{8};
@@ -77,6 +83,7 @@ int main() {
             test.execute(BytesAvailable{"abcdefgh"});
             test.execute(NotAtEof{});
         }
+        printf("777\n");
 
         {
             ReassemblerTestHarness test{8};
@@ -87,6 +94,7 @@ int main() {
             test.execute(BytesAvailable{"abcdefgh"});
             test.execute(AtEof{});
         }
+        printf("888\n");
 
         {
             ReassemblerTestHarness test{8};
@@ -100,6 +108,7 @@ int main() {
             test.execute(BytesAvailable{"abcdefgh"});
             test.execute(AtEof{});
         }
+        printf("999\n");
 
         {
             ReassemblerTestHarness test{8};
@@ -117,6 +126,7 @@ int main() {
             test.execute(BytesAvailable{"abcdefgh"});
             test.execute(NotAtEof{});
         }
+        printf("aaa\n");
     } catch (const exception &e) {
         cerr << "Exception: " << e.what() << endl;
         return EXIT_FAILURE;

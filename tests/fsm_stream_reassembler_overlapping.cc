@@ -21,6 +21,7 @@ int main() {
             test.execute(BytesAssembled(2));
             test.execute(BytesAvailable("ab"));
         }
+        cout << 1 << endl;
 
         {
             // Overlapping assembled (read) section
@@ -34,6 +35,7 @@ int main() {
             test.execute(BytesAvailable("b"));
             test.execute(BytesAssembled(2));
         }
+        cout << 2 << endl;
 
         {
             // Overlapping unassembled section, resulting in assembly
@@ -48,6 +50,7 @@ int main() {
             test.execute(UnassembledBytes{0});
             test.execute(BytesAssembled(2));
         }
+        cout << 3 << endl;
         {
             // Overlapping unassembled section, not resulting in assembly
             const size_t cap = {1000};
@@ -61,6 +64,7 @@ int main() {
             test.execute(UnassembledBytes{2});
             test.execute(BytesAssembled(0));
         }
+        cout << 3 << endl;
         {
             // Overlapping unassembled section, not resulting in assembly
             const size_t cap = {1000};
@@ -107,6 +111,8 @@ int main() {
             test.execute(BytesAssembled(4));
             test.execute(UnassembledBytes(0));
         }
+
+        cout << "aaaaaaaaaaaaaaaaaaaaaaaaaa" << endl;
 
         {
             // Submission within existing

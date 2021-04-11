@@ -58,6 +58,8 @@ int main() {
             test.execute(NotAtEof{});
         }
 
+        cout << 111111 << endl;
+
         {
             ReassemblerTestHarness test{65000};
 
