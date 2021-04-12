@@ -17,7 +17,7 @@ using namespace std;
 // Convert absolute seqno -> seqno.
 WrappingInt32 wrap(uint64_t n, WrappingInt32 isn) {
     uint64_t wrapped = (n % DIVISOR + static_cast<uint64_t>(isn.raw_value())) % DIVISOR;
-    return WrappingInt32{uint32_t(wrapped)};
+    return WrappingInt32{static_cast<uint32_t>(wrapped)};
 }
 
 //! Transform a WrappingInt32 into an "absolute" 64-bit sequence number (zero-indexed)
@@ -33,8 +33,9 @@ WrappingInt32 wrap(uint64_t n, WrappingInt32 isn) {
 // Convert seqno -> absolute seqno
 uint64_t unwrap(WrappingInt32 n, WrappingInt32 isn, uint64_t checkpoint) {
     WrappingInt32 wrapped_checkpoint = wrap(checkpoint, isn);
-    cout << "n: " << n.raw_value() << ", checkpoint: " << checkpoint << ", wrapped_checkpoint: " << wrapped_checkpoint
-         << endl;
+    // cout << "n: " << n.raw_value() << ", checkpoint: " << checkpoint << ", wrapped_checkpoint: " <<
+    // wrapped_checkpoint
+    //      << endl;
 
     uint64_t offset_after =
         (static_cast<uint64_t>(n.raw_value()) + DIVISOR - static_cast<uint64_t>(wrapped_checkpoint.raw_value())) %

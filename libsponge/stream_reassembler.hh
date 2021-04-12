@@ -21,7 +21,7 @@ class StreamReassembler {
     size_t _capacity;    //!< The maximum number of bytes
     size_t _unassembled_bytes = 0;
 
-    size_t _waiting_index = 0;
+    uint64_t _waiting_index = 0;
 
     struct block {
         size_t index;
@@ -68,6 +68,8 @@ class StreamReassembler {
     //! \brief Is the internal state empty (other than the output stream)?
     //! \returns `true` if no substrings are waiting to be assembled
     bool empty() const;
+
+    uint64_t waiting_index() const { return _waiting_index; }
 };
 
 #endif  // SPONGE_LIBSPONGE_STREAM_REASSEMBLER_HH
