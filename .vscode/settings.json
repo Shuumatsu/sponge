@@ -48,6 +48,7 @@
         "system_error": "cpp",
         "iomanip": "cpp",
         "iostream": "cpp",
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "variant": "cpp"
     }
 }

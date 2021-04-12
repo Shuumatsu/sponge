@@ -27,6 +27,8 @@ int main() {
             test.execute(ExpectTotalAssembledBytes{0});
         }
 
+        cout << 111111 << endl;
+
         {
             TCPReceiverTestHarness test{5435};
             test.execute(ExpectAckno{std::optional<WrappingInt32>{}});
@@ -37,6 +39,8 @@ int main() {
             test.execute(ExpectUnassembledBytes{0});
             test.execute(ExpectTotalAssembledBytes{0});
         }
+
+        cout << 222222 << endl;
 
         {
             TCPReceiverTestHarness test{5435};
@@ -49,6 +53,8 @@ int main() {
             test.execute(ExpectTotalAssembledBytes{0});
         }
 
+        cout << 33333 << endl;
+
         {
             TCPReceiverTestHarness test{5435};
             test.execute(ExpectAckno{std::optional<WrappingInt32>{}});
@@ -60,6 +66,8 @@ int main() {
             test.execute(ExpectUnassembledBytes{0});
             test.execute(ExpectTotalAssembledBytes{0});
         }
+
+        cout << 4444444 << endl;
 
         {
             TCPReceiverTestHarness test{5435};
@@ -77,6 +85,8 @@ int main() {
             test.execute(ExpectTotalAssembledBytes{0});
         }
 
+        cout << 6666666 << endl;
+
         {
             TCPReceiverTestHarness test{4000};
             test.execute(SegmentArrives{}.with_syn().with_seqno(5).with_fin().with_result(SegmentArrives::Result::OK));
@@ -85,6 +95,8 @@ int main() {
             test.execute(ExpectUnassembledBytes{0});
             test.execute(ExpectTotalAssembledBytes{0});
         }
+
+        cout << 7777777 << endl;
 
         {
             // Window overflow
