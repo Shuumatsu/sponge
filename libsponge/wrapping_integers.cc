@@ -1,21 +1,23 @@
 #include "wrapping_integers.hh"
 
+#include <iostream>
+
 // Dummy implementation of a 32-bit wrapping integer
 
 // For Lab 2, please replace with a real implementation that passes the
 // automated checks run by `make check_lab2`.
 
-template <typename... Targs>
-void DUMMY_CODE(Targs &&... /* unused */) {}
+#define DIVISOR 4294967296
 
 using namespace std;
 
 //! Transform an "absolute" 64-bit sequence number (zero-indexed) into a WrappingInt32
 //! \param n The input absolute 64-bit sequence number
 //! \param isn The initial sequence number
+// Convert absolute seqno -> seqno.
 WrappingInt32 wrap(uint64_t n, WrappingInt32 isn) {
-    DUMMY_CODE(n, isn);
-    return WrappingInt32{0};
+    uint64_t wrapped = (n % DIVISOR + static_cast<uint64_t>(isn.raw_value())) % DIVISOR;
+    return WrappingInt32{uint32_t(wrapped)};
 }
 
 //! Transform a WrappingInt32 into an "absolute" 64-bit sequence number (zero-indexed)
@@ -28,7 +30,21 @@ WrappingInt32 wrap(uint64_t n, WrappingInt32 isn) {
 //! runs from the local TCPSender to the remote TCPReceiver and has one ISN,
 //! and the other stream runs from the remote TCPSender to the local TCPReceiver and
 //! has a different ISN.
+// Convert seqno -> absolute seqno
 uint64_t unwrap(WrappingInt32 n, WrappingInt32 isn, uint64_t checkpoint) {
-    DUMMY_CODE(n, isn, checkpoint);
-    return {};
+    WrappingInt32 wrapped_checkpoint = wrap(checkpoint, isn);
+    cout << "n: " << n.raw_value() << ", checkpoint: " << checkpoint << ", wrapped_checkpoint: " << wrapped_checkpoint
+         << endl;
+
+    uint64_t offset_after =
+        (static_cast<uint64_t>(n.raw_value()) + DIVISOR - static_cast<uint64_t>(wrapped_checkpoint.raw_value())) %
+        DIVISOR;
+    uint64_t offset_before =
+        (static_cast<uint64_t>(wrapped_checkpoint.raw_value()) + DIVISOR - static_cast<uint64_t>(n.raw_value())) %
+        DIVISOR;
+
+    if (offset_before < offset_after && offset_before <= checkpoint) {
+        return checkpoint - offset_before;
+    }
+    return checkpoint + offset_after;
 }
