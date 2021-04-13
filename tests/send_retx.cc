@@ -44,6 +44,8 @@ int main() {
             test.execute(ExpectBytesInFlight{0});
         }
 
+        cout << endl << 111 << endl << endl;
+
         {
             TCPConfig cfg;
             WrappingInt32 isn(rd());
@@ -66,6 +68,8 @@ int main() {
             test.execute(Tick{(retx_timeout << TCPConfig::MAX_RETX_ATTEMPTS) - 1u}.with_max_retx_exceeded(false));
             test.execute(Tick{1}.with_max_retx_exceeded(true));
         }
+
+        cout << endl << 222 << endl << endl;
 
         {
             TCPConfig cfg;

@@ -38,6 +38,8 @@ int main() {
             test.execute(ExpectNoSegment{});
         }
 
+        cout << endl << endl << 1111 << endl << endl;
+
         {
             TCPConfig cfg;
             WrappingInt32 isn(rd());
@@ -60,6 +62,7 @@ int main() {
             test.execute(ExpectSegment{}.with_payload_size(3).with_data("abc").with_seqno(isn + 1));
             test.execute(ExpectNoSegment{});
         }
+        cout << endl << endl << 2222 << endl << endl;
 
         {
             TCPConfig cfg;
@@ -84,6 +87,7 @@ int main() {
             test.execute(Tick{2});
             test.execute(ExpectSegment{}.with_payload_size(3).with_data("def").with_seqno(isn + 4));
         }
+        cout << endl << endl << 3333 << endl << endl;
 
         {
             TCPConfig cfg;
@@ -104,7 +108,9 @@ int main() {
             test.execute(ExpectSegment{}.with_payload_size(3).with_data("def").with_seqno(isn + 4));
             test.execute(AckReceived{WrappingInt32{isn + 1}}.with_win(1000));
             test.execute(Tick{6});
+            cout << 123123 << endl;
             test.execute(ExpectSegment{}.with_payload_size(3).with_data("abc").with_seqno(isn + 1));
+            cout << 123123 << endl;
             test.execute(ExpectNoSegment{});
             test.execute(Tick{rto * 2 - 5});
             test.execute(ExpectNoSegment{});
@@ -112,6 +118,7 @@ int main() {
             test.execute(ExpectSegment{}.with_payload_size(3).with_data("abc").with_seqno(isn + 1));
             test.execute(ExpectNoSegment{});
         }
+        cout << endl << endl << 4444 << endl << endl;
 
         {
             TCPConfig cfg;
@@ -149,6 +156,8 @@ int main() {
             test.execute(ExpectSegment{}.with_payload_size(3).with_data("def").with_seqno(isn + 4));
             test.execute(ExpectNoSegment{});
         }
+        cout << endl << endl << 5555 << endl << endl;
+
         {
             TCPConfig cfg;
             WrappingInt32 isn(rd());
@@ -178,6 +187,7 @@ int main() {
                                  .with_seqno(isn + 1 + i));
             }
         }
+        cout << endl << endl << 6666 << endl << endl;
 
         {
             TCPConfig cfg;
@@ -197,6 +207,7 @@ int main() {
             test.execute(Tick{2});
             test.execute(ExpectSegment{}.with_payload_size(3).with_data("abc").with_seqno(isn + 1).with_fin(true));
         }
+        cout << endl << endl << 7777 << endl << endl;
 
         {
             TCPConfig cfg;
@@ -225,6 +236,7 @@ int main() {
             test.execute(Tick{10});
             test.execute(ExpectSegment{}.with_payload_size(0).with_seqno(isn + 4).with_fin(true));
         }
+        cout << endl << endl << 8888 << endl << endl;
 
         {
             TCPConfig cfg;
@@ -246,6 +258,7 @@ int main() {
             test.execute(AckReceived{WrappingInt32{isn + 4}}.with_win(1));
             test.execute(ExpectSegment{}.with_payload_size(0).with_seqno(isn + 4).with_fin(true));
         }
+        cout << endl << endl << 9999 << endl << endl;
 
         {
             TCPConfig cfg;
@@ -270,6 +283,7 @@ int main() {
             test.execute(AckReceived{WrappingInt32{isn + 4}}.with_win(1));
             test.execute(ExpectSegment{}.with_payload_size(0).with_seqno(isn + 4).with_fin(true));
         }
+        cout << endl << endl << "aaaa" << endl << endl;
 
         {
             TCPConfig cfg;

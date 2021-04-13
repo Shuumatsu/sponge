@@ -26,6 +26,8 @@ int main() {
             test.execute(ExpectBytesInFlight{1});
         }
 
+        cout << endl << 111 << endl << endl;
+
         {
             TCPConfig cfg;
             WrappingInt32 isn(rd());
@@ -40,6 +42,8 @@ int main() {
             test.execute(ExpectNoSegment{});
             test.execute(ExpectBytesInFlight{0});
         }
+
+        cout << endl << 222 << endl << endl;
 
         {
             TCPConfig cfg;

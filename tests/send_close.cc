@@ -32,6 +32,8 @@ int main() {
             test.execute(ExpectNoSegment{});
         }
 
+        cout << endl << 111 << endl << endl;
+
         {
             TCPConfig cfg;
             WrappingInt32 isn(rd());
@@ -50,6 +52,8 @@ int main() {
             test.execute(ExpectNoSegment{});
         }
 
+        cout << endl << 222 << endl << endl;
+
         {
             TCPConfig cfg;
             WrappingInt32 isn(rd());
@@ -67,6 +71,8 @@ int main() {
             test.execute(ExpectBytesInFlight{1});
             test.execute(ExpectNoSegment{});
         }
+
+        cout << endl << 333 << endl << endl;
 
         {
             TCPConfig cfg;
@@ -102,6 +108,8 @@ int main() {
             test.execute(ExpectBytesInFlight{0});
             test.execute(ExpectNoSegment{});
         }
+
+        cout << endl << 444 << endl << endl;
 
     } catch (const exception &e) {
         cerr << e.what() << endl;
