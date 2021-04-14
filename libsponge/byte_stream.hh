@@ -2,6 +2,9 @@
 #define SPONGE_LIBSPONGE_BYTE_STREAM_HH
 
 #include <string>
+#include <vector>
+
+using namespace std;
 
 //! \brief An in-order byte stream.
 
@@ -18,10 +21,25 @@ class ByteStream {
     // different approaches.
 
     bool _error{};  //!< Flag indicating that the stream suffered an error.
+    bool closed = false;
+
+    vector<char> buffer = {};
+    // where to write next
+    size_t write_position = 0;
+    // where to read next
+    size_t read_position = 0;
+
+    size_t capacity = 0;
+
+    size_t written_cnt = 0;
+    size_t read_cnt = 0;
+
+    size_t increase(size_t position) const;
+    size_t decrease(size_t position) const;
 
   public:
-    //! Construct a stream with room for `capacity` bytes.
-    ByteStream(const size_t capacity);
+    //! Construct a stream with room for `cap` bytes.
+    ByteStream(const size_t cap);
 
     //! \name "Input" interface for the writer
     //!@{
@@ -66,6 +84,9 @@ class ByteStream {
 
     //! \returns `true` if the buffer is empty
     bool buffer_empty() const;
+
+    //! \returns `true` if the buffer is empty
+    bool buffer_full() const;
 
     //! \returns `true` if the output has reached the ending
     bool eof() const;
