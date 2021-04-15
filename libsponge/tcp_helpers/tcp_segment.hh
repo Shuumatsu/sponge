@@ -5,6 +5,7 @@
 #include "tcp_header.hh"
 
 #include <cstdint>
+#include <iostream>
 
 //! \brief [TCP](\ref rfc::rfc793) segment
 class TCPSegment {
@@ -31,6 +32,14 @@ class TCPSegment {
     //! \brief Segment's length in sequence space
     //! \note Equal to payload length plus one byte if SYN is set, plus one byte if FIN is set
     size_t length_in_sequence_space() const;
+
+    friend std::ostream &operator<<(std::ostream &os, const TCPSegment &segment) {
+        TCPHeader header = segment.header();
+        os << "{header: seqno: " << header.seqno << ", syn: " << header.syn << ", ack: " << header.ack
+           << ", ackno: " << header.ackno << ", fin: " << header.fin << "}";
+
+        return os;
+    };
 };
 
 #endif  // SPONGE_LIBSPONGE_TCP_SEGMENT_HH
