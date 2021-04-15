@@ -6,6 +6,20 @@
 #include "tcp_sender.hh"
 #include "tcp_state.hh"
 
+enum ConnectionStatus {
+    CLOSED,
+    LISTEN,
+    SYN_SENT,
+    SYN_RCVD,
+    ESTABLISHED,
+    FIN_WAIT_1,
+    FIN_WAIT_2,
+    CLOSING,
+    TIME_WAIT,
+    CLOSE_WAIT,
+    LAST_ACK
+};
+
 //! \brief A complete endpoint of a TCP connection
 class TCPConnection {
   private:
@@ -21,7 +35,15 @@ class TCPConnection {
     //! in case the remote TCPConnection doesn't know we've received its whole stream?
     bool _linger_after_streams_finish{true};
 
+    void shut_down(bool tell_remote);
+
+    void flush();
+
+    void send_segment(TCPSegment seg);
+
   public:
+    ConnectionStatus _connection_status = CLOSED;
+
     //! \name "Input" interface for the writer
     //!@{
 
